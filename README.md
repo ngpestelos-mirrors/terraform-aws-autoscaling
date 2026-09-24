@@ -222,7 +222,6 @@ Note: the default behavior of the module is to create an autoscaling group and l
 ```
 
 <!-- BEGIN_KNOWN_LIMITATIONS -->
-
 ## Known limitations (Terraform/OpenTofu, not this module)
 
 A few requests come up again and again and cannot be implemented by this
@@ -235,8 +234,9 @@ has been open since 2018,
 the same request for OpenTofu.
 
 - **Auto Scaling group desired_capacity reverts on every apply** - Native
-  options: leave `desired_capacity` unset, or fork and add
-  `ignore_changes = [desired_capacity]`.
+  options: set `ignore_desired_capacity_changes = true` (an existing group moves
+  to a new state address, so add a `moved` block), or leave `desired_capacity`
+  unset.
 
 [Compliance.tf](https://compliance.tf/?utm_source=github&utm_medium=readme&utm_campaign=known-limitations) serves this module with
 these rules applied at download time, on top of whatever your organization
@@ -254,7 +254,6 @@ diff without an account, open this module in the
 
 Disclosure: written by this module's maintainer, who also builds
 [compliance.tf](https://compliance.tf/?utm_source=github&utm_medium=readme&utm_campaign=known-limitations).
-
 <!-- END_KNOWN_LIMITATIONS -->
 
 ## Examples
